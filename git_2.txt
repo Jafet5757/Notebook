@@ -110,4 +110,6 @@ Major.Minor.Patch
 ---------------------GutHub-------------------------------------
 git remote add <url> // agrega un repositorio
 git push --tags // sube los tags del repo local
-git pull baja y combinas los cambios desde hithub a gut local
+git pull baja y combinas los cambios desde github a gut local
+
+git config --global pull.ff only // configura el pull global para que siempre haga un fast forward
