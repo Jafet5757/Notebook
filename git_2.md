@@ -17,9 +17,13 @@
 
 ## Vim <a href="vim"></a>
 
-| codigo | acción |
-|   --   |  --    |
-| Buen | dia |
+| codigo | descripcion |
+| -- | -- |
+| esc | para ir atras|
+| a | editar |
+| : | comenzar a escribir |
+| q | salir del modo lectura |
+| wq! | escribe y sal de inmediato|
 
 
 ## Cofiguraciones globales <a href="cg"></a>
