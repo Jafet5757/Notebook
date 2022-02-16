@@ -51,6 +51,7 @@ git log // nos muestra los commits
 git log --oneline // resumen de log
 git checkout -- . // reconstruye el proyecto al ultimo commit
 git checkout -- <archivo> // reconstruye solo un archivo al commit anterior
+git checkout <hash> <archivo> // reconstruye un archivo de un commit cualquiera
 
 ------------------Ramas------------------------------------
 git branch // nos dice en que rama estamos
@@ -110,6 +111,6 @@ Major.Minor.Patch
 ---------------------GutHub-------------------------------------
 git remote add <url> // agrega un repositorio
 git push --tags // sube los tags del repo local
-git pull baja y combinas los cambios desde github a gut local
+git pull // baja y combinas los cambios desde github a gut local
 
 git config --global pull.ff only // configura el pull global para que siempre haga un fast forward
