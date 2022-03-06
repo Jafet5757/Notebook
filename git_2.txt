@@ -16,7 +16,7 @@ git init // inicializa un repositorio
 git status // status del proyecto
 git status --short // nos muestra un resumen
 
------------------Staged-----------------------------------------
+-----------------Stage-----------------------------------------
 git add . // prepara todos los archivos
 git reset <nombre del archivo> // quita ese archido del add
 git add <directory>/*.html // agrega todos los html
@@ -33,6 +33,7 @@ git commit -m "repwitory name"// agrega nombre al repositorio
 git commit -am "repository name" // añade y hace commit en un paso *Solo con archivos ya agregados*
 git commit --amend -m "new repository name" // cambia el nombre del ultimo repo
 git commit --amend // entra al archivo de edicion
+git commit -am "Fixes #<numero>: <texto>" // hace referencia a el issue 5
 
 git reset --soft HEAD^<numero de commits antes> // elimina un commit antes del head *deja cambios*
 git reset --mixed <hash_nombre_HEAD^> // elimina commit hechos despues de este pero *deja cambios*
@@ -61,13 +62,17 @@ git branch <nuevaRama> // para crear una rama
 git checkout <rama> // para moverte a una rama
 git checkou -b <nuevaRama> //crea una rama y noes mueve a ella
 git merge <rama> // union de ramas debes estar en la rama donde llegan los cambios
+git branch -a // --all noes muestra ramas ocultas o no usadas
 
 git branch -d <rama> // borra una rama
 git branch -d <rama> -f // borra una rama de forma forzada cuando tiene cambios
 
+git remote prune origin // actualiza las referencias de las ramas del remoto
+
 ------------------Alias------------------------------
 git config --global alias.<nuevoAlias> <comandoAremplazar>
 	git config --global alias.s "status --short"
+git config --global -e // entramos a la configuracion global para editar un alias
 
 /* El siguiente es un alias recomendado que muestra logs*/
 git config --global alias.lg "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
@@ -79,6 +84,8 @@ git tag -d <nombre> // elimina un tag
 git show <tag> // nos muestra informacion de un tag especifico
 git tag -a <version> -m "message" // agrega una version al commit
 git tag -a <version> <hash> -m "message" // agrega version a un commit en el tiempo
+git push --tags // para subir los tags a github
+git ckeckout <v1.0.1> // para mover el head a un tag
 
 ----------------------Stash--------------------------------
 git stash // Guarda todos los cambios que no estén em el stage y lo quita del trabajo actual
@@ -112,5 +119,10 @@ Major.Minor.Patch
 git remote add <url> // agrega un repositorio
 git push --tags // sube los tags del repo local
 git pull // baja y combinas los cambios desde github a gut local
+git pull --all // baja todos los cambios, incluso referencias a nuevas ramas
+
+git fetch origin // baja los cambios en el origin
+git merge origin/master // combina el origin con el master
+git push origin master // sube los cambios del master al origin
 
 git config --global pull.ff only // configura el pull global para que siempre haga un fast forward
