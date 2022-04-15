@@ -1,0 +1,31 @@
+db - nos devuelve la base de datos seleccionada
+show dbs - muestra todas las bases de datos
+use 'nombre de la bd' - usa las bases de datos o las crea si no existen
+show collections - muestra las colecciones en una bd
+db.dropDatabase() - elimina la base de datos actual
+db.createCollection('nombre de la colección') - crea una coleccion
+db.'nombre de la coleccion'.drop() - elimina esa coleccion
+db.'nombre de la coleccion'.insert('data') - agrega los datos a la coleccion y la crea si no exite
+db.'nombre de la coleccion'.find() - nos trae todos los registros de la coleccion
+db.'nombre de la coleccion'.find().pretty() - trae los registros acomodados
+db.'nombre de la coleccion'.insert([{'name':'mouse'}, {'name':'laptop'}]) - agrega varios registros
+
+db.products.find({'name':'laptop'}) - busca los registros que cumplan esa propiedad
+db.products.find({'name':'laptop', 'price':'15'}) - registro que cumpla ambas propiedades
+db.products.findOne({'name':'laptop'}) - regresa el primer registro con esa coincidencia
+db.products.find({'name':'laptop'}, {'name':1, 'price':1, '_id':0}) - quiero nombre y precio pero no id
+db.products.find({'price':15}).sort({'name':1}) - los muestra ordenados por nombre alfabeticamente
+db.products.find().limit(2) - muestra solo las 2 priemras}
+db.products.count() - regresa el numero total de registros
+db.products.find().forEach(product => print('Product name: '+product.name)) - funciones
+
+UPDATE
+db.products.update({'busqueda'}, {'actualizacion'}) - actualiza todo el registro
+db.products.update({'busqueda'},{$set:{'actualizacion'}}) - agrega una nueva caracteriztica al registro
+db.products.update({'busqueda'}, {$set:{'actualizacion'}, {upsert:true}}) - agrega un nuevo registro aunque no exista
+db.products.update({'busqueda'}, {$inc:{'actualizacion': 'cantidad'}}) - incrementa un valor en una cantidad
+db.products.update({'busqueda'}, {$rename:{'campo':'nuevo nombre'}}) - renombra un campo (no un dato)
+
+REMOVE
+db.products.remove({'busqueda'}) - elimina un documento
+db.products.remove({}) - elimina todos los registros
