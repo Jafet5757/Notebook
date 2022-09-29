@@ -1,0 +1,63 @@
+show databases;  / para mostrar bases de datos
+create database 'name';  /crear una base de datos
+use 'name';  /  para entrar a la base
+show tables; / para ver las tablas
+describe 'nametable' / para ver las caracteristicas de la tabla
+select * from 'nametable' / para ver los datos de la tabla
+INSERT INTO 'nameTable'(col1, col2) VALUES(valor1, valor2);
+	///para ingresar 
+FROM 'nameTable' WHERE 'atributo' = 'atributo'; / para buscar un dato en especifico
+FROM 'nametable' WHERE (NOMBRE='atributo') AND/OR (ID='atributo');
+SELECT ID,NOMBRE / para traer solo los atributos pedidos
+SELECT * FROM 'nameTable' WHERE(NOMBRE LIKE 'K%');
+SELECT COUNT(*) FROM SECOND; / para contar todos los registros
+CREATE TABEL...,PRIMARY KEY(ID)); / para poner una llave primaria
+CREATE TABEL...,PRIMARY KEY(ID,NOMBRE)); / para poner una llave primaria compuesta
+drop / para borrar la tabla
+ALTER TABLE 'nametable' ADD COLUMN NAC DATE NOT NULL; / para agrega una nueva columna
+ALTER TABLE 'nametable' ADD COLUMN('nombreNuevo' DATE NOT NULL DEFAULT '2000-01-01'); /	para agregar un dato por default
+______________________________________________________________________________
+SELECT * FROM 'nametable' WHERE(MONTH(FECHA)=4);
+SELECT * FROM AL2 WHERE (MONTH(FECHA)=1 AND DAY(FECHA)<=01);
+BETWEEN 3 AND 6 / es para encontrar datos entre 3 y 6
+SELECT FROM ALUMNO WHERE (MONTH(FECHA) BETWEEN 3 AND 6;
+°°sin funcion agregada
+SELECT FROM ALUMNO WHERE (FECHA BETWEEN '2003-01-01' AND '2003-12-31');
+°°Llave foranea 
+FOREIGN KEY ('nameColumn.this') REFERENCES 'nameTableForeign'('nameColumnForeign');
+
+__________________________________________
+SQL Server
+SELECT * FROM tabla1 INNER JOIN tabla2 on...
+°°como hacer un join
+SELECT NOM_ALU,EDAD_ALU,SEM_ALU,NOM_C
+FROM ALUMNO INNER JOIN CARRERA ON ALUMNO.CLAVE_C1=CARRERA.CLAVE_C
+°°aqui acaba el join
+
+°°auto incrementable
+	ID int identyty (1,1);
+-------------------basicas----------------------------
+'CREATE TABLE DATOS(ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            NOMBRE VARCHAR(20) UNIQUE, 
+            CONTRASEÑA VARCHAR (25), 
+            APELLIDO VARCHAR (50), 
+            DIRECCION VARCHAR(50), 
+            COMENTARIO VARCHAR(85))
+
+SELECT NOMBRE FROM DATOS WHERE ID= '"+id.get()+"'"
+
+UPDATE DATOS SET NOMBRE='"+nombre.get()+"' WHERE ID= "+auxid
+
+DELETE FROM DATOS WHERE ID="+auxid
+
+--------------------------------------------
+SELECT DISTINCTROW col FROM mydb / toma solo un valor y no lo vuelve a repetir, en caso de que haya varios
+
+-----------------------------Usuarios y privilegios-----------------
+CREATE USER name IDENTIFIED BY 'contraseña' // para crear un nuevo usuario
+
+//para solucionar el error de node
+
+create user nodeuser@localhost identified by 'nodeuser@1234';
+grant all privileges on 'database'.* to nodeuser@localhost;
+ALTER USER 'nodeuser'@localhost IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';
