@@ -1,0 +1,36 @@
+-------------------------------Creacion de tablas------------------------------
+CREATE TABLE nombre_de_la_tabla (campo1 tipo_dato, campo2_tipo_dato...) / así se crea una tabla de manera basica
+
+DROP TABLE nombre_tabla / con esto eliminamos la tabla
+
+CREATE TABLE nombre_tabla (id INT AUTO_INCREMENT, nombre VARCHAR(20), edad TINYINT, fecha DATE, asistencia BOOL, PRIMARY KEY(id)) / en este caso el id va a ser auto incrementable
+
+---------------agregar, modificar y eliminar campos de una tabla-----------------------------
+ALTER TABLE tabla ADD COLUMN poblacion VARCHAR(20) / con esto agregamos la columna poblacon a la tabla ya creada
+
+ALTER TABLE tabla DROP COLUMN poblacion / con esto decimos que vamos a modificar la tabla y dentro decimos que vamos a borrar la columna poblacion
+
+ALTER TABLE tabla MODIFY nombre VARCHAR(30) / es para modificar una columna en MYSQL
+
+ALTER TABLE tabla ALTER COLUMN poblacion SET DEFAULT 'desconocido' / para decir que esa tabla tendrá la palabra 'desconocido' por defecto
+
+ALTER TABLE tabla ALTER COLUMN poblacion DROP DEFAULT / con esto quitamos lo que tenga por defecto
+
+-----------------------------Creacion de indices------------------------------
+CREATE TABLE tabla (ine VARCHAR(10), PRIMARY KEY(INE)) / así creamos una llave primaria
+
+ALTER TABLE tabla ADD PRIMARY KEY (id) / en este caso le decimos que agrege una llave primaria a una tabla ya creada
+
+ALTER TABLE tabla ADD PRIMARY KEY (id, nombre) / le decimos que cree una llave p´rimaria multicampo
+
+CREATE INDEX miindice ON tabla (apellido) / crear una tabla con un indice ordinario
+
+CREATE UNIQUE INDEX miindice ON tabla (apellido) / para crear un indice unico, que no se repita
+
+CREATE UNIQUE INDEX miindice ON tabla (apellido,nombre) / para crear un indice compuesto
+
+DROP INDEX miindice ON tabla / sirve para eliminar el indice de la tabla
+
+ALTER TABLE tabla DROP CONSTRAINT index_2E949562_F3A6_5SC5C / esto es para borrar la llave primaria solo en SQL SERVER, ORACLE, ACCES
+
+ALTER TABLE tabla DROP PRIMARY KEY / esto es para borrar la llave primaria en MYSQL

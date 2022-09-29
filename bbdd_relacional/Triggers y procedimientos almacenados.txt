@@ -1,0 +1,55 @@
+---------------------------Triggers---------------------------------------------------------------
+CREATE TRIGGER productos_ai AFTER INSERT ON productos FOR EACH ROW INSERT INTO reg_productos(id,nombre) VALUES(NEW.id,NEW.nombre) / creamos el trigger con el nombre productos_ai que ai=After Insert, luego decimos que despues de insertar algo en productos por cada fila insertar en una nueva tabla reg_productos en los campos is y nombre los valores del nuevo id y el nuevo nombre
+
+DROP TRIGGER IF EXISTS insercion_datos / así es cmo eliminamos un trigger en mysql
+
+CREATE TRIGGER actualizar_BU BEFORE UPDATE ON productos FOR EACH ROW INSERT INTO actualizar (id,nombre) VALUES(OLD.id,OLD.nombre) / en esta decimos que antes de hacer una actualizacion en la tabla productos nos ingrese los datos antiguos en una tabla que se llama actualizar
+
+CREATE TRIGGER aliminar_ad AFTER DELETE ON productos FOR EACH ROW INSERT INTO respaldo (id,nombre) VALUES (OLD.id,OLD.nombre) / este es para insertar en una tabla de respaldo los datos que se hayan eliminado
+
+/*para modificar un trigger es necesario primero eliminarlo y volverlo a crear*/
+
+--------------------------------procedimientos almacenados---------------------------------
+CREATE PROCEDURE muestra_clientes() SELECT * FROM tabla / es es un procedimiento basico que nos muestra todos los registros de la tabla
+
+CALL muestra_clientes() / así se manda a llamar a un procedimiento almacenado
+
+CREATE PROCEDURE actualizar (id_p INT,nombre_new VARCHAR(20)) UPDATE tabla SET nombre=nombre_new WHERE id=id_p / este procedimiento hace una actualizacion con los datos que recibe como argumentos
+
+DELIMITER $$
+CREATE PROCEDURE calcula_edad(agnon INT)
+	BEGIN
+		DECLARE agnoactual INT DEFAULT 2020;
+		DECLARE edad INT;
+		SET edad=agnoactual-agnon;
+		SELECT edad;
+	END;$$
+DELIMITER ;
+/*que esta ´pasando, primero creamos un delimitador de bloque no el simbolo $$, despues declaramos un procedimiento almacenado con un parametro, despues ponemos BEGIN para decir que ahí inicia el bloque, dentro del bloque declaramos dos variables, agnoactual y edad, con SET realizamos la operacion (mandamos a edad esos datos), y usamos el SELECT como un RETURN, con END finalizamos el bloque y ponemos $$ para delimitarlo y decir que ahí acaba el bloque. para terminar volvemos a colocar DELIMITER ; para restaurar el simbolo*/
+
+-------------------------------procedimientos y triggers---------------------------------
+DELIMITER $$
+CREATE TRIGGER revisa_precio_bu BEFORE UPDATE ON productos FOR EACH ROW
+	BEGIN
+		IF(NEW.precio<0) THEN
+			SET NEW.precio=0;
+		ELSEIF(NEW.precio>1000) THEN
+			SET NEW.precio=1000;
+		END IF;
+	END;$$
+DELIMITER ;
+/*en este caso en vez de usar un procedmimiento usamos un TRIGGER en el que programamos una funcion que revisa el precio del producto*/
+
+------------------------------vistas--------------------------------
+CREATE VIEW productos AS SELECT * FROM tabla / creamos una vista con el nombre prodcutos de la tabla, vamos  a obtener todos los dats de la tabla y se actualizaran junto con ella, basicamente se creará una tabla llamada productos con los datos de tabla
+
+DROP VIEW productos / así se elimina una vista en MYSQL
+
+ALTER VIEW productos AS SELECT nombre FROM tabla / así se hace una modificacion en una vista
+
+----------------------------------Check y LIKE----------------------------
+CREATE TABLE tabla (id INT NOT NULL CHECK(id >=0) / decimos que los datos de id deben ir siempre con un numero mayor a cero
+
+CREATE TABLE tabla (id VARCHAR(20) NOT NULL CHECK(id LIKE 'C[0-9][0-9]')) / le decimos que debe tener una C y dos numero que van del 0-9
+
+ALTER TABLE moderador DROP CONSTRAINT moderador_chk_1 / así se elimina un check

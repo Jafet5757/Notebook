@@ -1,0 +1,65 @@
+----------------------BETWEEN y ORDER BY-------------------------
+
+SELECT * FROM tabla WHERE fecha BETWEEN '2000-03-01' AND '2000-04-30'/ es para seleccionar los registros en esos rangos de fechas
+
+SELECT * FROM tabla WHERE seccion="deportes" OR seccion="ceramica" ORDER BY seccion / le decimos que nos de esa consulta ordenadsa por seccion de menor a mayor o de la a-z
+
+SELECT * FROM tabla WHERE seccion="deportes" OR seccion="ceramica" ORDER BY seccion DESC / con el desc le decimos que lo ordene de manera descendiente, por ejemplo de la z-a y de mayor a menor
+
+SELECT * FROM tabla WHERE seccion="deportes" OR seccion="ceramica" ORDER BY seccion DESC, precio DESC / le decmios que los ordene por seccion y luego por precio, esto funciona cuando hay varios con el mismo nombre en el primer parametro
+
+--------------------------------Consultas de agrupacion o totales---------------------------------
+SELECT seccion, SUM(precio) FROM tabla GROUP BY seccion / lo que esta haciendo es agrupar los registros por seccion y despues los suma, el group By los agrupa de modo que no se repitan
+
+SELECT seccion, SUM(precio) AS suma_articulos FROM tabla GROUP BY suma_artuculos/ con el AS le damos un alias a esa seccion, notese que el ORDER BY se refiere a su alias y no a su nombre original
+
+SELECT seccion,AVG(precio) AS media_articulos FROM productos GROUP BY seccion HAVING seccion="deportes" OR seccion="urbano" / en este caso estamos tomando la media de los precios y estamos ordenando por seccion tomando solo la seccion de deportes o urbano, en este caso el HAVING sustituye al WHERE por ser grupos
+
+---------------------Consultas de calculo-------------------------------------
+SELECT articulo,seccion,precio, ROUND(precio*1.21) FROM tabla  / le decimos que incremente en 21% el valor del precio, y le decmios que os redondee
+
+SELECT articulo,seccion,precio, precio-3 AS precio_nuevo_calculado FROM tabla / hacemos un descuento de 3 en el precio de todos
+
+SELECT nombre,precio, NOW() AS dia_de_hoy FROM alumno / le decimos que nos muestre la fecha de hoy
+
+SELECT Nombre,precio,fecha,NOW() AS dia_de_hoy, DATEDIFF(NOW(),fecha) FROM tabla / en esta mostramos la diferencia que hay entre las fechas del registro y del dia actual
+
+SELECT Nombre,precio,fecha,DATE_FORMAT(NOW()),'%D,%M') AS dia_de_hoy, DATEDIFF(NOW(),fecha) FROM tabla / con el date format le cambiamos el formato en este caso para que slo nos muestre el dia y el mes, si quisieramos el año agregamos %y
+
+
+--------------------------------consultas multitabla-------------------------------------
+SELECT * FROM tabla1 UNION SELECT * FROM tabla2 / le decimos que haga la primer consulta y tome los resultados y los revuelva con la segunda consulta en sus mismas columnas, por lo que es necesario que tengan las mimsas columnas y tipos de datos. esta union no muestra los datos que se reiten en las otra tablas
+
+SELECT * FROM tabla1 UNION ALL SELECT * FROM tabla2 / hace lo mismo que la tabla anterior pero en esta nos muestra todos los datos, incluso los que se repitan
+
+SELECT * FROM clientes INNER JOIN pedidos ON clientes.codigocliente=pedidos.codigocliente / le decimos que tpme todos los datos de las tablasque tengan la misma llave primaria en ambas tablas
+
+SELECT * FROM alumno INNER JOIN dalumno_grupo ON alumno.boleta=dalumno_grupo.alumno_boleta / otro ejemplo con una de nuestras bd
+
+SELECT * FROM clientes LEFT JOIN pedidos ON clientes.codigocliente=pedidos.codigocliente / es lo mismo que el inner pero esta vez tommamos tambien todos los datos de la izquierda (primer tabla)
+
+SELECT * FROM clientes RIGHT JOIN pedidos ON clientes.codigocliente=pedidos.codigocliente lo mismo que el left pero ahora con la tabla derecha
+
+SELECT cliente.id,poblacion,pedidos.id FROM clientes INNER JOIN pedidos ON cliente.id=pedidos.id / en este caso como hay dos columnas que se llaman id hay que especificar de que tabla queremos el dato
+
+--------------------------------Subconsultas-----------------------------------------------
+SELECT nombre,seccion FROM tabla WHERE precio > (SELECT AVG(precio) FROM tabla) / en este caso le decimos que nos muestre todos los precios que sean mayores a la media, CONSULTA ESCALONADA 
+
+SELECT * FROM tabla WHERE precio > ALL (SELECT precio FROM tabla WHERE seccion='deportes') / le decimos que obtenga los precios de la seccion deportes, en la cunsulta padre debe seleccionar los precios mayores a TODOS (este es el ALL) los precios realizados en la subconsulta de LISTA
+
+SELECT * FROM tabla WHERE precio > ANY (SELECT precio FROM tabla WHERE seccion='deportes') / nos devuleve todos los precios cuyo valor sea mayor a cualquiera de los de la subconsulta
+
+SELECT nombre,precio FROM tabla WHERE id IN (SELECT id FROM tabla FROM tabla2 WHERE cantidad>20) / en la subconsulta nos va a dar los id de los registros mayores a 20, en la consulta decimos que nos de nombre y precio de la tabla donde el id este en los registros de la subconsulta
+
+----------------------------------CONSULTAS DE ACCION-------------------------
+UPDATE productos SET precio=precio+10 WHERE seccion='deportes' / esto dice que actualize el precio en 10 donde la seccion de deportes
+
+CREATE TABLE new_table SELECT * FROM old_table WHERE poblacion='mexico' / le decimos que cree una nueva tabla con los datos de una tabla antigua
+
+INSERT INTO tabla SELECT * FROM tabla2 / le decimos que enserte en una tabla todos los datos de la tabla2
+
+ FALTO CONSULTAS DE ELIMINACION
+
+-------------------------------Referemcias cruzadas----------------------------
+TRANSFORM SUM(precio) AS total SELECT seccion FROM productos GROUP BY seccion PIVOT ombre / esto nos devuelve una tabla con datos cruzados, PERO NO ES ADMITIDA ESTA CONSULTA EN MYSQL
+

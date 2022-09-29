@@ -1,0 +1,124 @@
+-------------------------DEFINICIONES--------------------------------
+
+DDL (Data Definition Lenguage):
+	Se utilizan para crear y modificar la estructura de una bbdd, se puede crear tablas, eliminar tablas y modificar su estructura
+	Comandos:
+		CREATE crear
+		ALTER modificar
+		DROP eliminar
+		TRUNCATE borrar todas las filas
+
+DML (Data Manipulation Lenguage):
+	Se utilizan para seleccionar registros, insertar registros actualizar, borrar, se utilizan para hacer consultas de seleccion y accion
+	Comandos:
+		SELECT seleccionar
+		INSERT insertar datos
+		UPDATE actualizar
+		DELETE eliminar
+
+DCL (Data Control Lenguage):
+	Se utiliza para proporcionar seguridad a la informacino 
+	Comandos:
+		GRANT
+		REVOKE
+
+TCL (Transation Control Lenguage):
+	Se utilizan para la gestion de los cambios en los datos
+	Comandos:
+		COMMIT
+		ROLLBACK
+		SAVEPOINT
+
+----------------------------CLAUSULAS---------------------
+FROM: Especifica la tabla de la que quoeren obtener los registros
+WHERE: Especifica las condiciones o criterios de los registros seleccionados
+GROUP BY: Para agrupar los registros seleccionadosen funcion de un campo
+HAVING: Especifica las condiciones o criterios que deben cumplir los grupos
+ORDER BY: ordena los registros seleccionados em funcion de un campo
+
+-------------------OPERADORES----------------------------------
+< menor que
+> mayor que
+= igual
+>= mayor o igual
+<= menor  igual
+<> diferente
+BETWEEN entre. utilizado para especificar ragngos de valores
+LIKE Como. Utilizado con caracteres comodín
+IN En. Para especificar registros en un campo en concreto
+ANY significa cualquiera, para decir que debe cumplir cualquiera de las condiciones
+ALL significa todos, para decir que todos deben cumplir una condicion
+
+AND y logico
+OR o logico
+NOT logico
+
+Orden:
+Comando+FROM+WHERE+GROUP BY+HAVING+ORDER BY
+
+-------------------------------Funciones de agregado---------------------------
+AVG: Calcula el promedio de un campo
+COUNT: Cuenta los registros de un campo
+SUM: Suma los valores de un campo
+MAX: Devuelve el maximo de un campo
+MIN: Devuelve el minimo de un campo
+
+--------------------funciones frecuentes-----------------------------------
+NOW(): Devuelve el dia y la hora
+DATEDIFF(): nos devuelve la diferencia que hay entre dos fechas
+DATE_FORMAT(): sirven para formatear resultados
+CONCAT(): sirve para concatenar
+
+--------------------consultas de union------------------------------------
+Union externa:
+-UNION hace una union entre dos consultas
+-UNION ALL hace una union entre dos consultas tomando datos repetidos
+-EXCEPT
+-INTERSECT
+-MINUS
+
+Union interna:
+-INNER JOIN nos muestra los datos de una interseccion de dos tablas
+-LEFT JOIN nos devuelve todos los datos de la interseccion de dos tablas y todos los datos de la tabla izquierda
+-RIGHT JOIN nos devuelve todos los datos de la interseccion de dos tablas y todos los datos de la tabla derecha
+
+--------------------------subconsultas---------------------------------
+-subconsultas escalonadas: es hacer una consulta dentro de otra, que nos devuelve un solo articulo
+-subconsultas de lista: este nos devulve una lista de registros dentro de otra consulta
+-subconsultas correlacionada
+
+------------------------------consultas sin repetir-------------------------
+DISTINCT: evita que se repita un dato en columna
+DISTINCTROW: evita que se repita un datos en fila
+
+---------------------------tipos de tablas-----------------------------
+Tablas base:
+-persistentes
+-temporales globales
+-temporales locales creadas
+-templorales locales declaradas
+Tablas derivadas
+Tablas vistas
+
+-----------------------------tipos de datos------------------------------
+predefinido:
+-cadena
+-numericos
+-fecha/hora
+-booleanos
+construido
+definidos por usuario
+
+---------------------------tipos de indices----------------------
+indices de clave primaria:
+-cada valor es unico
+-no null
+indices ordinarios:
+-permite duplicados
+-si null
+indices unicos:
+-no permite duplicados
+-si null
+indices compuestos:
+-multiples columnas
+-si null
