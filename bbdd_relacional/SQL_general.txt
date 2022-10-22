@@ -1,3 +1,6 @@
+Linux connect
+# mysql -h nombre_host -u nombre_usuario -pcontraseña nombre_BDD
+
 show databases;  / para mostrar bases de datos
 create database 'name';  /crear una base de datos
 use 'name';  /  para entrar a la base
