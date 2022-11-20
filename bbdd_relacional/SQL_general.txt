@@ -64,3 +64,52 @@ CREATE USER name IDENTIFIED BY 'contraseña' // para crear un nuevo usuario
 create user nodeuser@localhost identified by 'nodeuser@1234';
 grant all privileges on 'database'.* to nodeuser@localhost;
 ALTER USER 'nodeuser'@localhost IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';
+
+
+-------------------------Fecha-------------------------------------------
+select now();   #   ejemplo:  '2010-01-12 10:50:43'
+select CURDATE();  # ejemplo: '2010-01-12'  #sin hora
+select curTime(); #Selecciona la hora
+
+select YEAR(NOW());  #Selecciona el año
+select MONTH (NOW()) as mes;  #Selecciona el mes
+select DAY(NOW()) as dia; #Selecciona el día 
+select TIME(NOW()) as hora;  #Selecciona la hora
+Select LAST_DAY(NOW()); # Selecciona el ultimo dia del mes
+
+---formato
+select Date_format(now(),'%Y/%M/%d'); # '2010/January/12'
+select Date_format(now(),'%Y-%M-%d %h:%i:%s %p'); #'2010-January-12 12:34:29 AM'
+select Date_format(now(),'%W %d %M %Y'); # 'Tuesday 12 January 2010'
+select Date_format(now(),'El año actual es %Y'); # 'El año actual es 2010'
+
+- %d #Día del mes numérico (00...31)
+- %H #Hora (00...23)
+- %h #Hora (01...12)
+- %i #Minutos, numérico (00...59)
+- %M #Nombre mes (January...December)
+- %m #Mes, numérico (00...12)
+- %p #AM o PM
+- %W #Nombre día semana (Sunday...Saturday)
+- %Y #Año, numérico, cuatro dígitos
+- %y #Año, numérico (dos dígitos)
+- %s #Segundos (00...59)
+
+---sumar tiempo
+select DATE_ADD(NOW(),INTERVAL 20 DAY); # Agrega 20 días a la fecha actual
+select DATE_ADD(NOW(),INTERVAL 30 MINUTE); # Agrega 30 minutos a la fecha actual
+select DATE_ADD(NOW(),INTERVAL 50 YEAR); #Agrega 50 años a la fecha actual
+select DATE_ADD(NOW(),INTERVAL '10-5' YEAR_MONTH); #Agrega 10 años 5 meses a la fecha actual
+
+select DATE_SUB(NOW(),INTERVAL 8 YEAR); #Resta 8 años a la fecha actual 
+select DATE_SUB(NOW(),INTERVAL 24 HOUR); #Resta 24 horas a la fecha actual
+select DATE_SUB(NOW(),INTERVAL '7-2' YEAR_MONTH); #Resta 7 años dos meses a la fecha actual
+
+SECOND #Segundos
+MINUTE #Minutos
+HOUR #Horas
+DAY #Días
+MONTH #Meses
+YEAR #Años
+YEAR_MONTH #'Años-meses'
+DAY_HOUR #'Días Horas'
